@@ -85,7 +85,8 @@ Yes, swap () is reentrant because there is no use of semaphores, monitors or loc
 Memory sharing IPC is ideal for this situation because you have a fairly large file (10 MB) that you want to pass from a process P1 to another process P2. Process P1 can first read the file to the main memory, wake up the process P2, while the pointer to the memory of the stored file, and asynchronously waiting for P2 to complete. Once the process P2 wakes up, it will synchronize access to the memory and begin to compress the data in the memory location. Once the compression is complete, P2 will release the lock on the memory, send an interrupt to the P1 to warn that the file has been compressed and restored to sleep.
 
 6.
-	monitor SomeMonitor {
+monitor SomeMonitor {
+
     condition c1, c2, c3;
     private int v1, v2, v3;
 
@@ -125,10 +126,4 @@ Memory sharing IPC is ideal for this situation because you have a fairly large f
         c3.signal();
     }
 }
-
-
-
-
-
-
 
